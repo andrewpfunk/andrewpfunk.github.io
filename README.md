@@ -1,2 +1,2 @@
 # andrewpfunk.github.io
-Public repository for GutHub Pages
+Public repository for GitHub Pages
