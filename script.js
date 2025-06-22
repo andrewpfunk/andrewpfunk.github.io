@@ -28,7 +28,7 @@ class Model {
     this.onTodoListChanged(todos)
     localStorage.setItem('todos', JSON.stringify(todos))
     
-    //document.dispatchEvent(new Event('localStorageUpdated'));
+    document.dispatchEvent(new Event('localStorageSet'));
   }
 
   addTodo(todoText) {
@@ -257,4 +257,8 @@ class Controller {
 
 const app = new Controller(new Model(), new View())
 
-window.onstorage = console.log('STORAGE EVENT');
+const localStorageSetHandler = function(e) {
+  console.log('localStorage.set("' + e.key + '", "' + e.value + '") was called');
+};
+
+document.addEventListener("localStorageSet", localStorageSetHandler, false);
