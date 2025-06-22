@@ -28,7 +28,7 @@ class Model {
     this.onTodoListChanged(todos)
     localStorage.setItem('todos', JSON.stringify(todos))
     
-    document.dispatchEvent(new Event('localStorageUpdated'));
+    //document.dispatchEvent(new Event('localStorageUpdated'));
   }
 
   addTodo(todoText) {
