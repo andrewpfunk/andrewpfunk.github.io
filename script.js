@@ -12,17 +12,17 @@ class Model {
     this.onTodoListChanged = callback
   }
 
-  _saveTodos() {
-    // TODO save Todos to database
-    let result = await fetch('/.netlify/functions/saveTodos', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(todos),
-    });
-    console.log(result);
-  }
+  // _saveTodos() {
+  //   // TODO save Todos to database
+  //   let result = await fetch('/.netlify/functions/saveTodos', {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(todos),
+  //   });
+  //   console.log(result);
+  // }
 
   _commit(todos) {
     this.onTodoListChanged(todos)
