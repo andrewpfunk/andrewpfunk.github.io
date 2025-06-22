@@ -254,7 +254,5 @@ const localStorageSetHandler = async function(e) {
       body: JSON.stringify(todos),
     });
     console.log(result);
-  }
-  console.log(result);
 };
 document.addEventListener("localStorageSet", localStorageSetHandler, false);
