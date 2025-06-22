@@ -69,7 +69,7 @@ class View {
     this.submitButton.textContent = 'Submit'
     this.form.append(this.input, this.submitButton)
     this.title = this.createElement('h1')
-    this.title.textContent = 'Todos'
+    this.title.textContent = 'Todo List'
     this.todoList = this.createElement('ul', 'todo-list')
     this.app.append(this.title, this.form, this.todoList)
 
