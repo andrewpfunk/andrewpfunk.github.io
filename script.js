@@ -246,13 +246,14 @@ class Controller {
 const app = new Controller(new Model(), new View())
 
 const localStorageSetHandler = async function(e) {  
-  let result = await fetch('/.netlify/functions/saveTodos', {
+  // let result = 
+    await fetch('/.netlify/functions/saveTodos', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(localStorage.getItem('todos')),
     });
-    console.log(result);
+    // console.log(result);
 };
 document.addEventListener("localStorageSet", localStorageSetHandler, false);
