@@ -12,18 +12,6 @@ class Model {
     this.onTodoListChanged = callback
   }
 
-  // _saveTodos() {
-  //   // TODO save Todos to database
-  //   let result = await fetch('/.netlify/functions/saveTodos', {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(todos),
-  //   });
-  //   console.log(result);
-  // }
-
   _commit(todos) {
     this.onTodoListChanged(todos)
     localStorage.setItem('todos', JSON.stringify(todos))
@@ -257,8 +245,16 @@ class Controller {
 
 const app = new Controller(new Model(), new View())
 
-const localStorageSetHandler = function(e) {
-  console.log('localStorage.set("' + e.key + '", "' + e.value + '") was called');
+const localStorageSetHandler = function(e) {  
+  let result = await fetch('/.netlify/functions/saveTodos', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todos),
+    });
+    console.log(result);
+  }
+  console.log(result);
 };
-
 document.addEventListener("localStorageSet", localStorageSetHandler, false);
