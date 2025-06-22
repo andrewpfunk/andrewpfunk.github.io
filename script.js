@@ -12,10 +12,7 @@ class Model {
     this.onTodoListChanged = callback
   }
 
-  _commit(todos) {
-    this.onTodoListChanged(todos)
-    localStorage.setItem('todos', JSON.stringify(todos))
-
+  async function _saveTodos() {
     // TODO save Todos to database
     let result = await fetch('/.netlify/functions/saveTodos', {
       method: 'PUT',
@@ -25,6 +22,11 @@ class Model {
       body: JSON.stringify(todos),
     });
     console.log(result);
+  }
+
+  _commit(todos) {
+    this.onTodoListChanged(todos)
+    localStorage.setItem('todos', JSON.stringify(todos))
   }
 
   addTodo(todoText) {
