@@ -12,7 +12,7 @@ class Model {
     this.onTodoListChanged = callback
   }
 
-  async function _saveTodos() {
+  async _saveTodos() {
     // TODO save Todos to database
     let result = await fetch('/.netlify/functions/saveTodos', {
       method: 'PUT',
