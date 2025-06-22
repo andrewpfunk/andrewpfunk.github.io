@@ -15,6 +15,16 @@ class Model {
   _commit(todos) {
     this.onTodoListChanged(todos)
     localStorage.setItem('todos', JSON.stringify(todos))
+
+    // TODO save Todos to database
+    let result = await fetch('/.netlify/functions/saveTodos', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todos),
+    });
+    console.log(result);
   }
 
   addTodo(todoText) {
