@@ -245,7 +245,7 @@ class Controller {
 
 const app = new Controller(new Model(), new View())
 
-const localStorageSetHandler = function(e) {  
+const localStorageSetHandler = async function(e) {  
   let result = await fetch('/.netlify/functions/saveTodos', {
       method: 'PUT',
       headers: {
