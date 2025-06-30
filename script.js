@@ -245,10 +245,9 @@ class Controller {
 
 const app = new Controller(new Model(), new View());
 
-// TODO call loadTodos and add a todo
-let result = await fetch('/.netlify/functions/loadTodos', {
-  method: 'GET',
-});
+// TODO call loadTodos and add the todo
+let result = await fetch('/.netlify/functions/loadTodos');
+
 
 const localStorageSetHandler = async function(e) {  
   let result = await fetch('/.netlify/functions/saveTodos', {
