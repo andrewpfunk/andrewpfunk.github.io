@@ -12,7 +12,7 @@ const handler = async (event) => {
 
     // TODO query database
 
-    const results = ["Add a serverless function"];
+    const results = "Add a serverless function";
     return {
       statusCode: 200,
       body: JSON.stringify(results),
