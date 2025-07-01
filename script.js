@@ -245,6 +245,7 @@ class Controller {
 
 const app = new Controller(new Model(), new View());
 
+// TODO loadTodos is not returning the right format, or something (502 Bad Gateway)
 fetch('/.netlify/functions/loadTodos').then(result => {
   app.model.addTodo(result);
 });
