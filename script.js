@@ -249,14 +249,14 @@ fetch('/.netlify/functions/loadTodos').then(result => {
   app.model.addTodo(result);
 });
 
-const localStorageSetHandler = async function(e) {  
-  let result = await fetch('/.netlify/functions/saveTodos', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(localStorage.getItem('todos')),
-    });
-    console.log(result);
-};
-document.addEventListener("localStorageSet", localStorageSetHandler, false);
+// const localStorageSetHandler = async function(e) {  
+//   let result = await fetch('/.netlify/functions/saveTodos', {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(localStorage.getItem('todos')),
+//     });
+//     console.log(result);
+// };
+// document.addEventListener("localStorageSet", localStorageSetHandler, false);
