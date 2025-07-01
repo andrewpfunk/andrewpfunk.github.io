@@ -12,7 +12,7 @@ const handler = async (event) => {
 
     // TODO query database
 
-    const results = [{"id":1,"text":"Add a serverless function","complete":false}]; // will the id conflict?
+    const results = ["Add a serverless function"];
     return {
       statusCode: 200,
       body: JSON.stringify(results),
