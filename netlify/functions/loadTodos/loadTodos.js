@@ -22,3 +22,5 @@ const handler = async (event) => {
     return { statusCode: 500, body: error.toString() }
   }
 }
+
+module.exports = { handler }
