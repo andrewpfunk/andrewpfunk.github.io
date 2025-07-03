@@ -246,6 +246,7 @@ class Controller {
 // TODO loadTodos is not returning the right format, or something (502 Bad Gateway)
 fetch('/.netlify/functions/loadTodos').then(result => {
   console.log(result);
+  console.log(JSON.parse(result));
 });
 // TODO set localStorage to JSON returned by loadTodos
 
