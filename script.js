@@ -245,14 +245,9 @@ class Controller {
 
 async function setTodos() {
   let results = await fetch('/.netlify/functions/loadTodos');
-
-  console.log(results);
-
   let parsedResults = await results.json();
-
-  console.log(parsedResults); 
-
-  localStorage.setItem('todos', JSON.stringify(parsedResults));    
+  localStorage.setItem('todos', results);    
+  // localStorage.setItem('todos', JSON.stringify(parsedResults));    
 }
 setTodos();
 // TODO by definition, will this not wait?
