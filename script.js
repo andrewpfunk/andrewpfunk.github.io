@@ -245,10 +245,14 @@ class Controller {
 
 async function setTodos() {
   let results = await fetch('/.netlify/functions/loadTodos');
+
+  console.log(results);
+
   let parsedResults = await results.json();
 
-  console.log(parsedResults);
-  // TODO set localStorage to JSON returned by loadTodos
+  console.log(parsedResults); 
+
+  localStorage.setItem('todos', JSON.stringify(todos));    
 }
 setTodos();
 
