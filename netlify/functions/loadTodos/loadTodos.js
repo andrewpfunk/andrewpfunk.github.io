@@ -12,7 +12,8 @@ const handler = async (event) => {
 
     // TODO query database
 
-    const results = "Add a serverless function";
+    const results = [{id: 1, text: "Create a serverless function", complete: false}];
+
     return {
       statusCode: 200,
       body: JSON.stringify(results),
