@@ -252,9 +252,10 @@ async function setTodos() {
 
   console.log(parsedResults); 
 
-  localStorage.setItem('todos', JSON.stringify(todos));    
+  localStorage.setItem('todos', JSON.stringify(parsedResults));    
 }
 setTodos();
+// TODO by definition, will this not wait?
 
 const app = new Controller(new Model(), new View());
 
