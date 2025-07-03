@@ -243,12 +243,14 @@ class Controller {
   }
 }
 
-// TODO loadTodos is not returning the right format, or something (502 Bad Gateway)
-fetch('/.netlify/functions/loadTodos').then(results => {
-  console.log(results.json());
-  // console.log(JSON.parse(result));
-});
-// TODO set localStorage to JSON returned by loadTodos
+async function setTodos() {
+  let results = await fetch('/.netlify/functions/loadTodos');
+  let parsedResults = await results.json();
+
+  console.log(parsedResults);
+  // TODO set localStorage to JSON returned by loadTodos
+}
+setTodos();
 
 const app = new Controller(new Model(), new View());
 
