@@ -245,7 +245,7 @@ class Controller {
 
 async function setTodos() {
   const response = await fetch('/.netlify/functions/loadTodos');
-  const json = await resopnse.json();
+  const json = await response.json();
   localStorage.setItem('todos', JSON.stringify(json));
 
   const app = new Controller(new Model(), new View());
