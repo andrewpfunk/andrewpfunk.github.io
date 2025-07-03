@@ -243,14 +243,13 @@ class Controller {
   }
 }
 
-async function setTodos() {
-  let results = await fetch('/.netlify/functions/loadTodos');
-  let parsedResults = await results.json();
-  localStorage.setItem('todos', results);    
-  // localStorage.setItem('todos', JSON.stringify(parsedResults));    
+const setTodos = async () => {
+  const response = await fetch('/.netlify/functions/loadTodos');
+  const json = await response.json();  
+  localStorage.setItem('todos', JSON.stringify(json));    
 }
 setTodos();
-// TODO by definition, will this not wait?
+// TODO wait for this fetch to complete before initializing app
 
 const app = new Controller(new Model(), new View());
 
