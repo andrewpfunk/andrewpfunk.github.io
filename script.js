@@ -243,16 +243,12 @@ class Controller {
   }
 }
 
-const setTodos = async () => {
-  const response = await fetch('/.netlify/functions/loadTodos');
-  const json = await response.json();  
-  // localStorage.setItem('todos', JSON.stringify(json));   
-  console.log('setTodos ran') ;
-}
-setTodos();
-// TODO wait for this fetch to complete before initializing app
+fetch('/.netlify/functions/loadTodos').then(response => {
+  const json = await response.json();
+  localStorage.setItem('todos', JSON.stringify(json));
 
-const app = new Controller(new Model(), new View());
+  const app = new Controller(new Model(), new View());
+});
 
 // const localStorageSetHandler = async function(e) {  
 //   let result = await fetch('/.netlify/functions/saveTodos', {
