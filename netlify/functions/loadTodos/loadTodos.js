@@ -28,7 +28,13 @@ const handler = async (event) => {
     const scope = bucket.scope(BUCKET)
     const collection = scope.collection(BUCKET)
 
-    const results = collection.get(BUCKET)
+    // why is this crashing?
+    // const results = collection.get(BUCKET)
+    const results = [{
+      "id": 1,
+      "text": "Create a serverless function",
+      "complete": true
+    }]
 
     return {
       statusCode: 200,
