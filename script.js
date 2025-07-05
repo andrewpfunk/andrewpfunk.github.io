@@ -258,7 +258,7 @@ const localStorageSetHandler = async function(e) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(localStorage.getItem('todos')),
+      body: localStorage.getItem('todos'),
     });
     console.log(result);
 };
