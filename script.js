@@ -253,7 +253,7 @@ async function setTodos() {
 setTodos();
 
 const localStorageSetHandler = async function(e) {  
-  let result = await fetch('/.netlify/functions/saveTodos', {
+  const result = await fetch('/.netlify/functions/saveTodos', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
