@@ -29,7 +29,7 @@ const handler = async (event) => {
     const collection = scope.collection(BUCKET)
 
     // this either crashes or returns {}
-    const results = collection.get(BUCKET)
+    const results = await collection.get(BUCKET)
 
     // this works (and is what I expect to get from collection.get)
     // const results = [{
@@ -40,7 +40,7 @@ const handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: results.value//JSON.stringify(results.value),
+      body: JSON.stringify(results.value),
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
