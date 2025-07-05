@@ -28,15 +28,11 @@ const handler = async (event) => {
     const scope = bucket.scope(BUCKET)
     const collection = scope.collection(BUCKET)
 
-    const results = await cluster.query(`SELECT ${BUCKET} from ${BUCKET}.${BUCKET}.${BUCKET}`)
-    // SELECT todos from todos.todos.todos is returning an array, containing one object, with key 'todos' and value what we're after
-    // {"rows":[{"todos":[{"complete":true,"id":1,"text":"Create a serverless function"}]}],"meta":{"requestId":"ff181a9e-ab19-4f93-b16c-f2d943defc99","clientContextId":"fa0619-3963-e444-bac7-dfd084c5d6eea7","status":"success","signature":{"todos":"json"},"warnings":[]}}
-    // const results = [{id: 1, text: "Create a serverless function", complete: false}];
-    const whatIwant = results.rows.todos
+    const results = collection.get(BUCKET)
 
     return {
       statusCode: 200,
-      body: JSON.stringify(whatIwant),
+      body: JSON.stringify(results),
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
