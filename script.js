@@ -259,7 +259,6 @@ const localStorageSetHandler = async function(e) {
         'Content-Type': 'application/json',
       },
       body: localStorage.getItem('todos'),
-    });
-    console.log(result);
+    });    
 };
 document.addEventListener("localStorageSet", localStorageSetHandler, false);
