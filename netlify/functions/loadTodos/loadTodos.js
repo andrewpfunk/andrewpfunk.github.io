@@ -29,12 +29,14 @@ const handler = async (event) => {
     const collection = scope.collection(BUCKET)
 
     // why is this crashing?
-    // const results = collection.get(BUCKET)
-    const results = [{
-      "id": 1,
-      "text": "Create a serverless function",
-      "complete": true
-    }]
+    const results = collection.get(BUCKET)
+
+    // this works (and is what I expect to get from collection.get)
+    // const results = [{
+    //   "id": 1,
+    //   "text": "Create a serverless function",
+    //   "complete": true
+    // }]
 
     return {
       statusCode: 200,
