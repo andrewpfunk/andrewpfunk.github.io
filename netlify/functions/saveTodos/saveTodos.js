@@ -22,12 +22,15 @@ const handler = async (event) => {
   }
 
   try {
+
+    // try using _default scope and collection
     const cluster = await couchbaseClientPromise
     const bucket = cluster.bucket(BUCKET)
-    const scope = bucket.scope(BUCKET)
-    const collection = scope.collection(BUCKET)
+    // const scope = bucket.scope(BUCKET)
+    // const collection = scope.collection(BUCKET)
 
-    const result = await collection.upsert('todos', event.body)
+    // const result = await collection.upsert('todos', event.body)
+    const result = await cluster.upsert('todos', event.body)
 
     return {
       statusCode: 200,
