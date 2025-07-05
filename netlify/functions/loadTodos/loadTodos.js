@@ -1,4 +1,17 @@
-// TODO connect to database
+const couchbase = require('couchbase')
+
+const ENDPOINT = process.env.COUCHBASE_ENDPOINT
+const USERNAME = process.env.COUCHBASE_USERNAME
+const PASSWORD = process.env.COUCHBASE_PASSWORD
+const BUCKET = process.env.COUCHBASE_BUCKET
+
+const couchbaseClientPromise = couchbase.connect('couchbases://' + ENDPOINT, {
+  username: USERNAME,
+  password: PASSWORD,
+  timeouts: {
+    kvTimeout: 10000, // milliseconds
+  },
+})
 
 const handler = async (event) => {
   // only allow GET requests
@@ -10,9 +23,12 @@ const handler = async (event) => {
 
   try {
 
-    // TODO query database
+    const cluster = await couchbaseClientPromise
+    const bucket = cluster.bucket(BUCKET)
+    const scope = bucket.scope(BUCKET)
+    const collection = scope.collection(BUCKET)
 
-    const results = [{id: 1, text: "Create a serverless function", complete: false}];
+    const results = await cluster.query('SELECT * from `${BUCKET}`.${BUCKET}.${BUCKET}')
 
     return {
       statusCode: 200,
