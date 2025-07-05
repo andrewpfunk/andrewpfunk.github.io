@@ -28,7 +28,8 @@ const handler = async (event) => {
     const scope = bucket.scope(BUCKET)
     const collection = scope.collection(BUCKET)
 
-    const results = await cluster.query('SELECT * from `${BUCKET}`.${BUCKET}.${BUCKET}')
+    // const results = await cluster.query('SELECT * from `${BUCKET}`.${BUCKET}.${BUCKET}')
+    const results = [{id: 1, text: "Create a serverless function", complete: false}];
 
     return {
       statusCode: 200,
