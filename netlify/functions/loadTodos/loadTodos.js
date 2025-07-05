@@ -28,7 +28,7 @@ const handler = async (event) => {
     const scope = bucket.scope(BUCKET)
     const collection = scope.collection(BUCKET)
 
-    const results = await cluster.query('SELECT ${BUCKET} from ${BUCKET}.${BUCKET}.${BUCKET}')
+    const results = await cluster.query(`SELECT ${BUCKET} from ${BUCKET}.${BUCKET}.${BUCKET}`)
     // SELECT todos from todos.todos.todos is returning an array, containing one object, with key 'todos' and value what we're after
     // const results = [{id: 1, text: "Create a serverless function", complete: false}];
 
