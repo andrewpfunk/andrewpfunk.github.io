@@ -245,19 +245,40 @@ class Controller {
   }
 }
 
+/*
+fetch('your-api-endpoint')
+  .then(response => {
+    if (response.status === 200) {
+      console.log('Request successful! Status code: 200 OK');
+      return response.json(); // Or .text(), .blob(), etc.
+    } else {
+      console.error('Request failed with status:', response.status);
+      throw new Error('Non-200 status code');
+    }
+  })
+  .then(data => {
+    // Process the data from the successful response
+    console.log('Received data:', data);
+  })
+  .catch(error => {
+    console.error('Error during fetch:', error);
+  });
+*/
+
 // async function setTodos() {
   // try {
     // const response = await fetch('/.netlify/functions/loadTodos');
     // const json = await response.json();
     // localStorage.setItem('todos', JSON.stringify(json));
+
   fetch('/.netlify/functions/loadTodos').then(response => {
-    response.json().then(json => {
-      localStorage.setItem('todos', JSON.stringify(json));
-    });    
-  }).catch(error => {
-    console.error(error.message);
-  });
-  // } catch (error) {
+    if (response.status === 200) {
+      response.json().then(json => {
+        localStorage.setItem('todos', JSON.stringify(json));
+      }); 
+    }
+  }
+    // } catch (error) {
   //   console.error(error.message);
   // }
   const app = new Controller(new Model(), new View());
