@@ -249,10 +249,12 @@ fetch('/.netlify/functions/loadTodos').then(response => {
   if (response.status === 200) {
     response.json().then(json => {
       localStorage.setItem('todos', JSON.stringify(json));
-    }); 
-
-    const app = new Controller(new Model(), new View());
+    });   
   }
+}).catch(error => {
+  console.log(error.message);
+}).finally(() => {
+  const app = new Controller(new Model(), new View());
 });
 
 const localStorageSetHandler = async function(e) {  
