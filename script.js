@@ -245,45 +245,15 @@ class Controller {
   }
 }
 
-/*
-fetch('your-api-endpoint')
-  .then(response => {
-    if (response.status === 200) {
-      console.log('Request successful! Status code: 200 OK');
-      return response.json(); // Or .text(), .blob(), etc.
-    } else {
-      console.error('Request failed with status:', response.status);
-      throw new Error('Non-200 status code');
-    }
-  })
-  .then(data => {
-    // Process the data from the successful response
-    console.log('Received data:', data);
-  })
-  .catch(error => {
-    console.error('Error during fetch:', error);
-  });
-*/
+fetch('/.netlify/functions/loadTodos').then(response => {
+  if (response.status === 200) {
+    response.json().then(json => {
+      localStorage.setItem('todos', JSON.stringify(json));
+    }); 
+  }
+});
 
-// async function setTodos() {
-  // try {
-    // const response = await fetch('/.netlify/functions/loadTodos');
-    // const json = await response.json();
-    // localStorage.setItem('todos', JSON.stringify(json));
-
-  fetch('/.netlify/functions/loadTodos').then(response => {
-    if (response.status === 200) {
-      response.json().then(json => {
-        localStorage.setItem('todos', JSON.stringify(json));
-      }); 
-    }
-  });
-    // } catch (error) {
-  //   console.error(error.message);
-  // }
-  const app = new Controller(new Model(), new View());
-// }
-// setTodos();
+const app = new Controller(new Model(), new View());
 
 const localStorageSetHandler = async function(e) {  
   try {  
