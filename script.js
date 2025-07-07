@@ -277,7 +277,7 @@ fetch('your-api-endpoint')
         localStorage.setItem('todos', JSON.stringify(json));
       }); 
     }
-  }
+  });
     // } catch (error) {
   //   console.error(error.message);
   // }
