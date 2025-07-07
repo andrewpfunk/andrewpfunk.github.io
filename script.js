@@ -249,7 +249,7 @@ async function setTodos() {
     const json = await response.json();
     localStorage.setItem('todos', JSON.stringify(json));
   } catch (error) {
-    console.error('what the hell just happened?');
+    console.error(error.message);
   }
   const app = new Controller(new Model(), new View());
 }
