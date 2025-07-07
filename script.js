@@ -252,7 +252,7 @@ fetch('/.netlify/functions/loadTodos').then(response => {
     });   
   }
 }).catch(error => {
-  console.log(error.message);
+  console.error(error.message);
 }).finally(() => {
   const app = new Controller(new Model(), new View());
 });
