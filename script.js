@@ -244,21 +244,28 @@ class Controller {
 }
 
 async function setTodos() {
-  const response = await fetch('/.netlify/functions/loadTodos');
-  const json = await response.json();
-  localStorage.setItem('todos', JSON.stringify(json));
-
+  try {
+    const response = await fetch('/.netlify/functions/loadTodos');
+    const json = await response.json();
+    localStorage.setItem('todos', JSON.stringify(json));
+  } catch (error) {
+    console.error(error.message);
+  }
   const app = new Controller(new Model(), new View());
 }
 setTodos();
 
 const localStorageSetHandler = async function(e) {  
-  const result = await fetch('/.netlify/functions/saveTodos', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: localStorage.getItem('todos'),
-    });    
+  try {  
+    const result = await fetch('/.netlify/functions/saveTodos', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: localStorage.getItem('todos'),
+      });    
+  } catch (error) {
+    console.error(error.message);
+  }
 };
 document.addEventListener("localStorageSet", localStorageSetHandler, false);
