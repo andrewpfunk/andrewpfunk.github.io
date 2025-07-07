@@ -1,3 +1,5 @@
+// https://www.taniarascia.com/javascript-mvc-todo-app/
+
 /**
  * @class Model
  *
@@ -243,17 +245,24 @@ class Controller {
   }
 }
 
-async function setTodos() {
-  try {
-    const response = await fetch('/.netlify/functions/loadTodos');
-    const json = await response.json();
-    localStorage.setItem('todos', JSON.stringify(json));
-  } catch (error) {
+// async function setTodos() {
+  // try {
+    // const response = await fetch('/.netlify/functions/loadTodos');
+    // const json = await response.json();
+    // localStorage.setItem('todos', JSON.stringify(json));
+  fetch('/.netlify/functions/loadTodos').then(response => {
+    response.json().then(json => {
+      localStorage.setItem('todos', JSON.stringify(json));
+    });    
+  }).catch(error => {
     console.error(error.message);
-  }
+  });
+  // } catch (error) {
+  //   console.error(error.message);
+  // }
   const app = new Controller(new Model(), new View());
-}
-setTodos();
+// }
+// setTodos();
 
 const localStorageSetHandler = async function(e) {  
   try {  
