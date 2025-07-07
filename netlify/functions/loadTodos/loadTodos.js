@@ -29,11 +29,10 @@ const handler = async (event) => {
     const collection = scope.collection(BUCKET)
 
     const results = await collection.get(BUCKET)
-    // const results = [{id: 1, text: "Create a serverless function", complete: false}]
 
     return {
       statusCode: 200,
-      body: results.value, //JSON.stringify(results), //results.value,
+      body: results.value,
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
