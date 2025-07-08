@@ -245,31 +245,16 @@ class Controller {
   }
 }
 
-const app = new Controller(new Model(), new View());
-
+let app = null;
 fetch('/.netlify/functions/loadTodos').then(response => {
   if (response.status === 200) {
     response.json().then(json => {
       localStorage.setItem('todos', JSON.stringify(json));
-      app.onTodoListChanged();
+      app = new Controller(new Model(), new View());
     });   
   }
-}).catch(error => {
-  console.error(error.message);
 });
-
-// this works but try to do it better above
-// fetch('/.netlify/functions/loadTodos').then(response => {
-//   if (response.status === 200) {
-//     response.json().then(json => {
-//       localStorage.setItem('todos', JSON.stringify(json));
-//       const app = new Controller(new Model(), new View());
-//     });   
-//   }
-// }).catch(error => {
-//   console.error(error.message);
-//   const app = new Controller(new Model(), new View());
-// });
+if (!app) app = new Controller(new Model(), new View());
 
 const localStorageSetHandler = async function(e) {  
   try {  
