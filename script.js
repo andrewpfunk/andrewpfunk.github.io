@@ -261,6 +261,8 @@ class Controller {
 //   if (app === null) app = new Controller(new Model(), new View());
 // });
 
+const app = new Controller(new Model(), new View());
+
 const localStorageSetHandler = async function(e) {  
   try {  
     const result = await fetch('/.netlify/functions/saveTodos', {
