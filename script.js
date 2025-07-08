@@ -254,7 +254,7 @@ const app = new Controller(new Model(), new View());
 fetch('/.netlify/functions/loadTodos').then(response => {
   if (response.status === 200) {
     response.json().then(json => {
-      app.model_loadTodos();      
+      app.model._loadTodos();      
       app.onTodoListChanged(app.model.todos);
     });   
   }
