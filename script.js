@@ -253,8 +253,9 @@ fetch('/.netlify/functions/loadTodos').then(response => {
       app = new Controller(new Model(), new View());
     });   
   }
+}).finally(() => {
+  if (!app) app = new Controller(new Model(), new View());
 });
-if (!app) app = new Controller(new Model(), new View());
 
 const localStorageSetHandler = async function(e) {  
   try {  
