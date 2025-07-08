@@ -8,6 +8,9 @@
 class Model {
   constructor() {
     this.todos = JSON.parse(localStorage.getItem('todos')) || []
+
+    console.log('Model constructor sees:');
+    console.log(this.todos);
   }
 
   bindTodoListChanged(callback) {
