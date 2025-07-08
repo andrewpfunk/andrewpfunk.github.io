@@ -256,6 +256,9 @@ fetch('/.netlify/functions/loadTodos').then(response => {
     response.json().then(json => {
       app.model._loadTodos();      
       app.onTodoListChanged(app.model.todos);
+      // TODO the above isn't working
+      // create a reload function that just does the right thing
+      // we'll eventually call it via setInterval
     });   
   }
 });
