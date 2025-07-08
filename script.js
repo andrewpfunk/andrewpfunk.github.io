@@ -7,7 +7,7 @@
  */
 class Model {
   constructor() {
-    this.todos = JSON.parse(localStorage.getItem('todos')) || []
+    this._load();
   }
 
   bindTodoListChanged(callback) {
@@ -19,6 +19,10 @@ class Model {
     localStorage.setItem('todos', JSON.stringify(todos))
     
     document.dispatchEvent(new Event('localStorageSet'));
+  }
+
+  _load() {
+    this.todos = JSON.parse(localStorage.getItem('todos')) || []
   }
 
   addTodo(todoText) {
@@ -245,17 +249,17 @@ class Controller {
   }
 }
 
-let app = null;
-fetch('/.netlify/functions/loadTodos').then(response => {
-  if (response.status === 200) {
-    response.json().then(json => {
-      localStorage.setItem('todos', JSON.stringify(json));
-      app = new Controller(new Model(), new View());
-    });   
-  }
-}).finally(() => {
-  if (app === null) app = new Controller(new Model(), new View());
-});
+// let app = null;
+// fetch('/.netlify/functions/loadTodos').then(response => {
+//   if (response.status === 200) {
+//     response.json().then(json => {
+//       localStorage.setItem('todos', JSON.stringify(json));
+//       app = new Controller(new Model(), new View());
+//     });   
+//   }
+// }).finally(() => {
+//   if (app === null) app = new Controller(new Model(), new View());
+// });
 
 const localStorageSetHandler = async function(e) {  
   try {  
