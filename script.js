@@ -254,11 +254,9 @@ const app = new Controller(new Model(), new View());
 fetch('/.netlify/functions/loadTodos').then(response => {
   if (response.status === 200) {
     response.json().then(json => {
+      localStorage.setItem('todos', JSON.stringify(json));
       app.model._loadTodos();      
-      app.view.displayTodos(app.model.todos);
-      // TODO the above isn't working
-      // create a reload function that just does the right thing
-      // we'll eventually call it via setInterval
+      app.view.displayTodos(app.model.todos);      
     });   
   }
 });
