@@ -10,6 +10,10 @@ class Model {
     this.loadTodos();
   }
 
+  loadTodos() {
+    this.todos = JSON.parse(localStorage.getItem('todos')) || []
+  }
+
   bindTodoListChanged(callback) {
     this.onTodoListChanged = callback
   }
@@ -19,10 +23,6 @@ class Model {
     localStorage.setItem('todos', JSON.stringify(todos))
     
     document.dispatchEvent(new Event('localStorageSet'));
-  }
-
-  loadTodos() {
-    this.todos = JSON.parse(localStorage.getItem('todos')) || []
   }
 
   addTodo(todoText) {
