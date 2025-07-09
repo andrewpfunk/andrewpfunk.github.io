@@ -7,7 +7,7 @@
  */
 class Model {
   constructor() {
-    this._loadTodos();
+    this.loadTodos();
   }
 
   bindTodoListChanged(callback) {
@@ -21,7 +21,7 @@ class Model {
     document.dispatchEvent(new Event('localStorageSet'));
   }
 
-  _loadTodos() {
+  loadTodos() {
     this.todos = JSON.parse(localStorage.getItem('todos')) || []
   }
 
@@ -247,6 +247,11 @@ class Controller {
   handleToggleTodo = id => {
     this.model.toggleTodo(id)
   }
+
+  reloadTodos = () => {
+    this.model.loadTodos();
+    this.view.displayTodos(this.model.todos);
+  }
 }
 
 const app = new Controller(new Model(), new View());
@@ -255,8 +260,7 @@ fetch('/.netlify/functions/loadTodos').then(response => {
   if (response.status === 200) {
     response.json().then(json => {
       localStorage.setItem('todos', JSON.stringify(json));
-      app.model._loadTodos();      
-      app.view.displayTodos(app.model.todos);      
+      app.reloadTodos();      
     });   
   }
 });
