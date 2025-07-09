@@ -1,4 +1,22 @@
 {
+  "name": "andrewpfunk.github.io",
+  "version": "1.0.0",
+  "description": "Public repository for GitHub Pages",
+  "homepage": "https://github.com/andrewpfunk/andrewpfunk.github.io#readme",
+  "bugs": {
+    "url": "https://github.com/andrewpfunk/andrewpfunk.github.io/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewpfunk/andrewpfunk.github.io.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "couchbase": "^4.5.0"
   }
