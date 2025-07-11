@@ -148,9 +148,6 @@ class View {
         this.todoList.append(li)
       })
     }
-
-    // Debugging
-    console.log(todos)
   }
 
   _initLocalListeners() {
@@ -251,6 +248,17 @@ class Controller {
   reloadTodos = () => {
     this.model.loadTodos();
     this.view.displayTodos(this.model.todos);
+  }
+}
+
+/**
+ * @class Database
+ *
+ * Manages the connection to the database
+ */
+class Database {
+  constructor() {
+    
   }
 }
 
