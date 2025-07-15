@@ -4,14 +4,30 @@
  * @class Model
  *
  * Manages the data of the application.
+ * 
+ * @param database
  */
 class Model {
-  constructor() {
-    this.loadTodos();
+  constructor(database) {
+    this.todos = JSON.parse(localStorage.getItem('todos')) || []
+
+    this.database = database;
+    this.counter = 0;
+    this.intervalId = setInterval(this.loadTodos.bind(this), 7000);
   }
 
-  loadTodos() {
+  async loadTodos() {
+    if (this.counter > 0) return;
+    this.counter++; // TODO use this to limit to one fetch at a time
+    console.log(`Counter: ${this.counter}`);
+
+    await this.database.loadTodos();
     this.todos = JSON.parse(localStorage.getItem('todos')) || []
+    this.onTodoListChanged(this.todos); 
+
+    // TODO refactor
+    // TODO experiment to see if this is working and if async/await is necessary
+    this.counter--;
   }
 
   bindTodoListChanged(callback) {
@@ -21,8 +37,8 @@ class Model {
   _commit(todos) {
     this.onTodoListChanged(todos)
     localStorage.setItem('todos', JSON.stringify(todos))
-    
-    document.dispatchEvent(new Event('localStorageSet'));
+        
+    this.database.saveTodos();
   }
 
   addTodo(todoText) {
@@ -148,9 +164,6 @@ class View {
         this.todoList.append(li)
       })
     }
-
-    // Debugging
-    console.log(todos)
   }
 
   _initLocalListeners() {
@@ -254,28 +267,65 @@ class Controller {
   }
 }
 
-const app = new Controller(new Model(), new View());
-
-fetch('/.netlify/functions/loadTodos').then(response => {
-  if (response.status === 200) {
-    response.json().then(json => {
-      localStorage.setItem('todos', JSON.stringify(json));
-      app.reloadTodos();      
-    });   
+/**
+ * @interface Database
+ *
+ * Synchronize data between localStorage and database
+ */
+class Database {
+  constructor() {
   }
-});
+}
 
-const localStorageSetHandler = async function(e) {  
-  try {  
-    const result = await fetch('/.netlify/functions/saveTodos', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: localStorage.getItem('todos'),
-      });    
-  } catch (error) {
-    console.error(error.message);
+/**
+ * @class Couchbase
+ *
+ * Synchronize data between localStorage and Couchbase
+ */
+class Couchbase extends Database {
+  constructor() {
+    super();    
   }
-};
-document.addEventListener("localStorageSet", localStorageSetHandler, false);
+
+  saveTodos = () => {
+    fetch('/.netlify/functions/saveTodos', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: localStorage.getItem('todos')
+    }).then(response => {
+      if (!response.ok) {
+        console.error(response.error);
+      }
+    }).catch(error => {
+      console.error(error.message);
+    });    
+  }
+
+  loadTodos = () => {
+    fetch('/.netlify/functions/loadTodos').then(response => {
+      if (response.status === 200) {  
+        response.json().then(json => {
+          localStorage.setItem('todos', JSON.stringify(json));          
+        });   
+      }
+    }).catch(error => {
+      console.error(error.message);
+    }); 
+  }
+
+}
+
+/**
+ * @class MongoDB
+ *
+ * Synchronize data between localStorage and MongoDB
+ */
+class MongoDB extends Database {
+  constructor() {
+    super();
+  }
+}
+
+const app = new Controller(new Model(new Couchbase()), new View());
