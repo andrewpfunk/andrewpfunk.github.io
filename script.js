@@ -14,6 +14,9 @@ class Model {
     this.database = database;
     this.counter = 0;
     this.intervalId = setInterval(this.loadTodos.bind(this), 7000);
+
+    // TODO call loadTodos once to start
+    // TODO queue up changes and contact database when necessary, not every 7 seconds
   }
 
   async loadTodos() {
