@@ -268,12 +268,13 @@ class Controller {
 }
 
 /**
- * @interface Database
+ * @class Database
  *
- * Synchronize data between localStorage and database
+ * Manages the connection to the database
  */
 class Database {
   constructor() {
+    
   }
 }
 
